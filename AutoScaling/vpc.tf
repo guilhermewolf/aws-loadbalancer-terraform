@@ -1,7 +1,7 @@
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.70.0"
-  name    = "my-vpc"
+  name    = "${var.name}-vpc"
   cidr    = "10.0.0.0/16"
 
   azs             = ["${var.region}a", "${var.region}b", "${var.region}c"]
@@ -12,6 +12,7 @@ module "vpc" {
   enable_vpn_gateway = false
 
   tags = {
-    Provider = "terraform"
+    Provider   = "terraform"
+    Enviroment = "${var.environment}"
   }
 }

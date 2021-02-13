@@ -1,7 +1,7 @@
 module "elb" {
   source = "terraform-aws-modules/elb/aws"
 
-  name = "elb-autoscaling"
+  name = "${var.name}-elb"
 
   subnets         = module.vpc.public_subnets
   security_groups = [module.web_server_sg.this_security_group_id, module.alb_sg.this_security_group_id]
@@ -30,7 +30,8 @@ module "elb" {
   }
 
   tags = {
-    Name     = var.name
-    Provider = "terraform"
+    Name       = "${var.name}-elb"
+    Provider   = "terraform"
+    Enviroment = "${var.environment}"
   }
 }

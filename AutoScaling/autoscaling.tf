@@ -2,10 +2,10 @@ module "asg" {
   source  = "terraform-aws-modules/autoscaling/aws"
   version = "~> 3.0"
 
-  name = "scale_group"
+  name = "${var.name}-scale-group"
 
   # Launch configuration
-  lc_name = "apache_webserver"
+  lc_name = "${var.name}-webserver"
 
   image_id            = data.aws_ami.ubuntu_latest.id
   instance_type       = var.instance_type
@@ -16,7 +16,7 @@ module "asg" {
   #elb
   load_balancers = [module.elb.this_elb_id]
   # Auto scaling group
-  asg_name            = "scale_group"
+  asg_name            = "${var.name}-scale-group"
   vpc_zone_identifier = module.vpc.private_subnets
   health_check_type   = "ELB"
   min_size            = 1
@@ -26,14 +26,14 @@ module "asg" {
   tags = [
     {
       key                 = "Name"
-      value               = "apache_webserver000"
+      value               = "${var.name}-webserver0"
       propagate_at_launch = true
     }
   ]
 }
 
 resource "aws_autoscaling_policy" "autoscalingpolicy" {
-  name                   = "terraform-autoscalepolicy"
+  name                   = "${var.name}-autoscalepolicy"
   scaling_adjustment     = 1
   adjustment_type        = "ChangeInCapacity"
   cooldown               = 300
@@ -41,7 +41,7 @@ resource "aws_autoscaling_policy" "autoscalingpolicy" {
 }
 
 resource "aws_autoscaling_policy" "autoscalepolicy-down" {
-  name                   = "terraform-autoscalepolicy-down"
+  name                   = "${var.name}-autoscalepolicy-down"
   scaling_adjustment     = -1
   adjustment_type        = "ChangeInCapacity"
   cooldown               = 300

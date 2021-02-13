@@ -13,6 +13,11 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
+variable "environment" {
+  description = "Enviroment especification"
+  default     = "prod"
+}
+
 variable "tcp_ports" {
   description = "Required Ingress TCP ports"
   default     = ["80", "443"]
