@@ -15,7 +15,7 @@ module "ec2-instance" {
 
   tags = {
     Provider   = "terraform"
-    Enviroment = "${var.environment}"
+    Enviroment = var.environment
   }
   depends_on = [module.vpc]
 }

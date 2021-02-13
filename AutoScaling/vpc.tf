@@ -13,6 +13,6 @@ module "vpc" {
 
   tags = {
     Provider   = "terraform"
-    Enviroment = "${var.environment}"
+    Enviroment = var.environment
   }
 }

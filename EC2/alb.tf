@@ -9,7 +9,7 @@ resource "aws_lb" "alb_ec2" {
   tags = {
     Name       = "${var.name}-alb"
     Provider   = "terraform"
-    Enviroment = "${var.environment}"
+    Enviroment = var.environment
 
   }
   depends_on = [module.vpc]
