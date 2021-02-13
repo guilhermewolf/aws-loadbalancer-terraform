@@ -5,7 +5,7 @@ variable "region" {
 
 variable "name" {
   description = "Name of the Application"
-  default     = "apache-websrv"
+  default     = "apache"
 }
 
 variable "instance_type" {
