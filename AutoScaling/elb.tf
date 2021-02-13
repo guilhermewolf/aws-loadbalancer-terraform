@@ -32,6 +32,13 @@ module "elb" {
   tags = {
     Name       = "${var.name}-elb"
     Provider   = "terraform"
-    Enviroment = "${var.environment}"
+    Enviroment = var.environment
   }
+}
+
+resource "aws_lb_cookie_stickiness_policy" "cookie_stickness" {
+  name                     = "cookiestickness"
+  load_balancer            = module.elb.this_elb_id
+  lb_port                  = 80
+  cookie_expiration_period = 600
 }
