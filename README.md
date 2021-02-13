@@ -46,3 +46,4 @@ terraform init
 terraform plan
 terraform apply
 ```
+> **Note:** After the infrastructure is built it takes a few minutes to the Load Balancer perform the EC2 healthcheck and start working properly
