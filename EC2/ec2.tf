@@ -2,7 +2,7 @@ module "ec2-instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 2.0"
 
-  name           = var.name
+  name           = "${var.name}-webserver"
   instance_count = 1
 
   ami                    = data.aws_ami.ubuntu_latest.id
@@ -14,7 +14,8 @@ module "ec2-instance" {
   subnet_ids             = module.vpc.private_subnets
 
   tags = {
-    Provider = "terraform"
+    Provider   = "terraform"
+    Enviroment = "${var.environment}"
   }
   depends_on = [module.vpc]
 }

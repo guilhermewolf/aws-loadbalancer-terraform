@@ -1,3 +1,4 @@
 output "aws_lb" {
-  value = aws_lb.alb_ec2.dns_name
+  description = "DNS Name of the ALB"
+  value       = aws_lb.alb_ec2.dns_name
 }

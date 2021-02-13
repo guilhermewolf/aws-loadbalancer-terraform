@@ -1,5 +1,5 @@
 resource "aws_lb" "alb_ec2" {
-  name               = "apache-alb"
+  name               = "${var.name}-alb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [module.web_server_sg.this_security_group_id, module.alb_sg.this_security_group_id]
@@ -7,15 +7,16 @@ resource "aws_lb" "alb_ec2" {
   idle_timeout       = 400
 
   tags = {
-    Name     = var.name
-    Provider = "terraform"
+    Name       = "${var.name}-alb"
+    Provider   = "terraform"
+    Enviroment = "${var.environment}"
 
   }
   depends_on = [module.vpc]
 }
 
 resource "aws_lb_target_group" "apache_tg" {
-  name       = "apache-tg"
+  name       = "${var.name}-tg"
   port       = 80
   protocol   = "HTTP"
   vpc_id     = module.vpc.vpc_id

@@ -5,12 +5,17 @@ variable "region" {
 
 variable "name" {
   description = "Name of the Application"
-  default     = "apache-websrv"
+  default     = "apache"
 }
 
 variable "instance_type" {
   description = "AWS Instance type defines the hardware configuration of the machine"
   default     = "t2.micro"
+}
+
+variable "environment" {
+  description = "Enviroment Especification"
+  default     = "prod"
 }
 
 variable "tcp_ports" {
